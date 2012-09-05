@@ -33,7 +33,7 @@
 				<li><a href="#addItem" id="mmAddLink">Add A New Trip</a></li>
 				<li><a href="#browse" id="mmBrowseLink">Browse Trips by Category</a></li>
 				<li><a href="#addItem" id="mmSearchLink">Search All Trips</a></li>
-				<li><a href="#about" id="mmAboutLink">About</a></li>
+				<li><a href="#moreInfo" id="mmAboutLink">More Info</a></li>
 			</ul>
 		</div>
 		
@@ -66,15 +66,24 @@
 					</fieldset>
 					<span id="buttonHolder"><input type="submit" id="addTrip" value="Add Trip" /></span>
 				</form>
-				<footer>
+			</div>
+			<footer>
 					<nav>
-						<div id="footer">
-							<a href="addItem.html" id="addNewTrip" class="links" style="display:none;">Add A New Trip</a>
-							<a href="#" id="clearTrips" class="links">Clear Stored Trips</a>
-							<a href="#" id="viewAllTrips" class="links">View Stored Trips</a>
-						</div>
+						<a href="#" id="addNewTrip" style="display:none;" data-ajax="false">Add A New Trip</a>
+						<a href="#" id="clearTrips">Clear Stored Trips</a>
+						<a href="#" id="viewAllTrips"">View Stored Trips</a>
 					</nav>
 				</footer>
+		</div>
+		
+		<div data-role="page" id="moreInfo" data-theme="b">
+			<div data-role="header" data-position="fixed" data-theme="b">
+				<h1>Trip Planner</h1>
+			</div>
+			<div data-role="content">
+				Git Link:<br />
+				Gold App Link:<br />
+				Bronze App Link:
 			</div>
 		</div>
 		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
