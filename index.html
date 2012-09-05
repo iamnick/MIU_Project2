@@ -30,13 +30,53 @@
 				<div id="ctaActionLink">Click to View Details!</div>
 			</div>
 			<ul data-role="listview" data-theme="b">
-				<li><a href="#addItem">Add A New Trip</a></li>
-				<li><a href="#browse">Browse Trips by Category</a></li>
-				<li><a href="#viewTrips" id="newViewTripsLink">Search All Trips</a></li>
-				<li><a href="#about">About</a></li>
+				<li><a href="#addItem" id="mmAddLink">Add A New Trip</a></li>
+				<li><a href="#browse" id="mmBrowseLink">Browse Trips by Category</a></li>
+				<li><a href="#addItem" id="mmSearchLink">Search All Trips</a></li>
+				<li><a href="#about" id="mmAboutLink">About</a></li>
 			</ul>
 		</div>
 		
+		<div data-role="page" id="addItem" data-theme="b">
+			<div data-role="header" data-position="fixed" data-theme="b">
+				<h1>Trip Planner</h1>
+			</div>
+			<div id="pageContent" data-role="content">
+				<form action="#" method="post" id="addTripForm">
+					<fieldset>
+						<legend id="formTitle">Add a Trip</legend>
+						<ul id="formOptions">
+							<ul id="errors"></ul>
+							<li id="select">
+								<label for="travelMethod">Method of Travel:</label>
+							</li>
+							<li>
+								<label for="tripType">Trip Type: </label>
+								<input type="radio" checked value="Business" id="business" name="tripType" /><label for="business">Business</label>
+								<input type="radio" value="Vacation" id="vacation" name="tripType" /><label for="vacation">Vacation</label>
+							</li>
+							<li><label for="dest">Destination: </label><input type="text" id="dest" /></li>	
+							<li><label for="date">Date of Trip: </label><input type="date" id="date" /></li>
+							<li>
+								<label for="numPeople">Number of People: </label><span id="people">1</span><br />
+								<input type="range" id="numPeople" min="1" max="10" value="1"/>
+							</li>
+							<li><label for="notes">Additional Notes:</label><br /><textarea id="notes"></textarea></li>
+						</ul>
+					</fieldset>
+					<span id="buttonHolder"><input type="submit" id="addTrip" value="Add Trip" /></span>
+				</form>
+				<footer>
+					<nav>
+						<div id="footer">
+							<a href="addItem.html" id="addNewTrip" class="links" style="display:none;">Add A New Trip</a>
+							<a href="#" id="clearTrips" class="links">Clear Stored Trips</a>
+							<a href="#" id="viewAllTrips" class="links">View Stored Trips</a>
+						</div>
+					</nav>
+				</footer>
+			</div>
+		</div>
 		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
 		<script src="js/json.js" type="text/javascript"></script>

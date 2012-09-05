@@ -94,15 +94,25 @@ window.addEventListener("DOMContentLoaded", function () {
 		}
 		var makeDiv = document.createElement('div');
 		makeDiv.setAttribute("id", "savedTrips");
+		makeDiv.setAttribute("data-role", "collapsible-set");
 		$('pageContent').appendChild(makeDiv);
+		var makeSearchDiv = document.createElement('div');
+		makeSearchDiv.setAttribute("data-role", "listview");
+		makeSearchDiv.setAttribute("data-inset", "true");
+		makeSearchDiv.setAttribute("data-filter", "true");
+		makeDiv.appendChild(makeSearchDiv);
 		
 		for (var i = 0, j = localStorage.length; i < j; i++) {
 			var makeSubDiv = document.createElement('div');
-			makeSubDiv.setAttribute("class", "tripContent");
-			makeDiv.appendChild(makeSubDiv);
+			makeSubDiv.setAttribute("data-role", "collapsible");
+			makeSubDiv.setAttribute("data-mini", "true");
+			makeSearchDiv.appendChild(makeSubDiv);
+			var makeH3 = document.createElement('h3');
+			makeSubDiv.appendChild(makeH3);
 			var key = localStorage.key(i);
 			var value = localStorage.getItem(key);
 			var obj = JSON.parse(value);
+			makeH3.innerHTML = obj.dest[1] + " - " + obj.date[1];
 			makeSubDiv.setAttribute("id", key);	
 			
 			// Add image based on trip type
@@ -261,4 +271,6 @@ window.addEventListener("DOMContentLoaded", function () {
 
 	var peopleSlider = $('numPeople');
 	peopleSlider.addEventListener("change", updatePeople);
+	
+	$('mmSearchLink').addEventListener("click", getData);
 });
