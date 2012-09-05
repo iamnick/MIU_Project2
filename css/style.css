@@ -1,0 +1,173 @@
+/*
+
+title: index.html / addItem.html Styles
+by: Nick Stelzer
+for: VFW 1208 - Project 4
+date: August 9, 2012
+
+*/
+
+body {
+	font-family: Arial, Helvetica, serif;
+	background: -webkit-gradient(linear, left top, 0 330, from(#11175E), to(#1B75BA));
+	min-height: 330px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+#content{overflow: scroll;}
+
+#indexPageContent {
+	background: #ffffff;
+	border-radius: 15px;
+	padding: 15px 15px 15px 15px;
+	text-align: center;
+}
+
+#nextTripBG {
+	position: relative;
+	width: 100%;
+}
+
+#nextTripText {
+	text-align: left;
+	position: absolute;
+	top: 180px;
+	left: 115px;
+	text-shadow: 2px 2px 1px rgba(17, 23, 94, .2);
+}
+
+#nextTripLocation {
+	margin-left: 40px;
+	font-size: 24px;
+}
+
+#nextTripDate {
+	margin-left: 60px;
+	font-size: 22px;
+}
+
+#clickToViewMsg {
+	position: absolute;
+	text-align: left;
+	color: #ffffff;
+	top: 280px;
+	left: 85px;
+	text-shadow: 2px 2px 1px rgba(17, 23, 94, .2);
+}
+
+.menuItem {
+	border-radius: 10px;
+	background: #eeeeee;
+	margin-top: 10px;
+	padding: 5px 10px 5px 10px;
+	text-align: left;
+	text-shadow: 2px 2px 1px rgba(17, 23, 94, .2);
+}
+
+.menuArrow {
+	float: right;
+}
+
+.menuItem a {
+	font-weight: bold;
+	color: orange;
+	text-shadow: none;
+	text-decoration: none;
+}
+
+#searchInput {
+	width: 100px;
+}
+
+.tripContent {
+	background: #ffffff;
+	border-radius: 15px;
+	font-size: 14px;
+	padding: 10px 10px 10px 10px;
+	margin: 10px 0px 10px 0px;
+}
+
+h1 {
+	border-radius: 15px;
+	text-align: center;
+	text-shadow: 2px 2px 1px rgba(17, 23, 94, .2);
+	padding: 10px 0px 10px 0px;
+	background: #ffffff;
+} 
+
+h2 {
+	margin-top: 20px;
+	margin-bottom: 5px;
+}
+
+#errors {
+	color: red;
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+
+#errors li {
+	min-height: 1px;
+	margin-bottom: 2px;
+}
+
+fieldset {
+	border: 0px;
+}
+
+form {
+	background: #ffffff;
+	border-radius: 15px;
+	font-size: 14px;
+	padding: 0px 0px 10px 0px;
+}
+
+legend {
+	font-size: 24px;
+	font-weight: bold;
+	text-shadow: 2px 2px 1px rgba(17, 23, 94, .2);
+	padding-top: 10px;
+}
+
+textarea {
+	height: 60px;
+	width: 220px;
+}
+
+ul {
+	margin-left: -20px;
+	list-style-type: square;
+}
+
+li {
+	min-height: 30px;
+	margin-bottom: 5px;
+}
+
+#buttonHolder {
+	display: block;
+	text-align: center;
+}
+
+#footer {
+	margin: 10px 0px 0px 0px;
+	text-align: center;
+}
+
+.links {
+	margin: 0px 5px 0px 5px;
+}
+
+a {
+	color: #63b7ea;
+}
+
+.methodIcon {
+	margin: 5px 5px 0px 0px;
+	float: right;
+}
+
+.editDeleteButtonSpan {
+	display: block;
+	text-align: right;
+}
