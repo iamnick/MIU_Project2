@@ -39,25 +39,6 @@ window.addEventListener("DOMContentLoaded", function () {
 		}
 	}
 	
-	// Hides/shows elements based on the link you click
-	function toggleDisplay (onOff) {
-		switch (onOff) {
-			case "on":
-				$('addTripForm').style.display = "none";
-				$('viewAllTrips').style.display = "none";
-				$('addNewTrip').style.display = "inline";
-				break;
-			case "off":
-				$('addTripForm').style.display = "block";
-				$('viewAllTrips').style.display = "inline";
-				$('addNewTrip').style.display = "none";
-				$('savedTrips').style.display = "none";
-				break;
-			default:
-				return false;
-		}
-	} 
-	
 	// Updates the span tag showing value of slider
 	function updatePeople () {
 		$('people').innerHTML = $('numPeople').value
@@ -87,68 +68,95 @@ window.addEventListener("DOMContentLoaded", function () {
 	
 	// Write data from localStorage to browser
 	function getData () {
-		toggleDisplay("on");
 		if (localStorage.length === 0) {
 			alert("There are no saved trips, so default data was added.");
 			autoFillData();
 		}
-		var makeDiv = document.createElement('div');
-		makeDiv.setAttribute("id", "savedTrips");
-		makeDiv.setAttribute("data-role", "collapsible-set");
-		$('pageContent').appendChild(makeDiv);
-		var makeSearchDiv = document.createElement('div');
-		makeSearchDiv.setAttribute("data-role", "listview");
-		makeSearchDiv.setAttribute("data-inset", "true");
-		makeSearchDiv.setAttribute("data-filter", "true");
-		makeDiv.appendChild(makeSearchDiv);
+
+		// figure out where these entries are going to be appended (search or browse page)
+		if ((this.id === "mmSearchLink") || (this.id === "ftSearchLink")) {
+			var appendLocation = $('searchTripList');
+			var browsing = false;
+			$('searchTripList').innerHTML = "";
+		} else {
+			var appendLocation = $('browseTripList');
+			var browsing = true;
+			catFilter = this.id;
+			$('browseTripList').innerHTML = "";
+		}
 		
+		// make collapsible mini's for each trip entry
 		for (var i = 0, j = localStorage.length; i < j; i++) {
-			var makeSubDiv = document.createElement('div');
-			makeSubDiv.setAttribute("data-role", "collapsible");
-			makeSubDiv.setAttribute("data-mini", "true");
-			makeSearchDiv.appendChild(makeSubDiv);
-			var makeH3 = document.createElement('h3');
-			makeSubDiv.appendChild(makeH3);
 			var key = localStorage.key(i);
 			var value = localStorage.getItem(key);
 			var obj = JSON.parse(value);
-			makeH3.innerHTML = obj.dest[1] + " - " + obj.date[1];
-			makeSubDiv.setAttribute("id", key);	
 			
-			// Add image based on trip type
-			var newImg = document.createElement('img');
-			newImg.setAttribute("src", "img/" + obj.method[1] + ".png");
-			newImg.setAttribute("class", "methodIcon");
-			makeSubDiv.appendChild(newImg);
-			
-			// Create List of Trip Details
-			var makeList = document.createElement('ul');
-			makeSubDiv.appendChild(makeList);
-			for (var k in obj) {
-				var makeLi = document.createElement('li');
-				makeList.appendChild(makeLi);
-				var optSubText = obj[k][0]+ " " + obj[k][1];
-				makeLi.innerHTML = optSubText;
+			// check for browsing and filter
+			if (browsing) {
+				if (obj.type[1] === catFilter) {
+					goodToGo = true;
+				} else {
+					goodToGo = false;
+				}
+			} else {
+				goodToGo = true;
 			}
 			
-			// Create Links to Edit/Delete
-			var buttonSpan = document.createElement('span');
-			buttonSpan.setAttribute("class", "editDeleteButtonSpan");
-			var editButton = document.createElement('input');
-			editButton.setAttribute("type", "submit");
-			editButton.setAttribute("value", "Edit");
-			editButton.key = key;
-			var removeButton = document.createElement('input');
-			removeButton.setAttribute("type", "submit");
-			removeButton.setAttribute("value", "Remove");
-			removeButton.key = key;
-			makeSubDiv.appendChild(buttonSpan);
-			buttonSpan.appendChild(editButton);
-			buttonSpan.appendChild(removeButton);
-			editButton.addEventListener("click", editTrip);
-			removeButton.addEventListener("click", removeTrip);
-			
+			if (goodToGo) {
+				// creates collapsible for trip data
+				var makeEntry = document.createElement('div');
+				makeEntry.setAttribute("data-role", "collapsible");
+				makeEntry.setAttribute("data-mini", "true");
+				appendLocation.appendChild(makeEntry);
+				var makeH3 = document.createElement('h3');
+				makeH3.innerHTML = obj.dest[1] + " - " + obj.date[1];
+				makeEntry.appendChild(makeH3);
+				makeEntry.setAttribute("id", key);	
+				
+				/*// Add image based on trip type
+				var newImg = document.createElement('img');
+				newImg.setAttribute("src", "img/" + obj.method[1] + ".png");
+				newImg.setAttribute("class", "methodIcon");
+				makeSubDiv.appendChild(newImg);
+				*/
+				
+				// Create List of Trip Details
+				var makeList = document.createElement('ul');
+				makeEntry.appendChild(makeList);
+				for (var k in obj) {
+					var makeLi = document.createElement('li');
+					makeList.appendChild(makeLi);
+					var optSubText = obj[k][0]+ " " + obj[k][1];
+					makeLi.innerHTML = optSubText;
+				}
+				
+				// Create Links to Edit/Delete
+				var buttonHolder = document.createElement('div');
+				buttonHolder.setAttribute("class", "ui-grid-a");
+				var editButtonDiv = document.createElement('div');
+				editButtonDiv.setAttribute("class", "ui-block-a");
+				var editButton = document.createElement('a');
+				editButton.setAttribute("data-role", "button");
+				editButton.setAttribute("href", "#addItem");
+				editButton.innerHTML = "Edit";
+				editButton.key = key;
+				var removeButtonDiv = document.createElement('div');
+				removeButtonDiv.setAttribute("class", "ui-block-b");
+				var removeButton = document.createElement('a');
+				removeButton.setAttribute("data-role", "button");
+				removeButton.setAttribute("href", "#");
+				removeButton.innerHTML = "Remove";
+				removeButton.key = key;
+				makeEntry.appendChild(buttonHolder);
+				buttonHolder.appendChild(editButtonDiv);
+				buttonHolder.appendChild(removeButtonDiv);
+				editButtonDiv.appendChild(editButton);
+				removeButtonDiv.appendChild(removeButton);
+				editButton.addEventListener("click", editTrip);
+				removeButton.addEventListener("click", removeTrip);
+			}
 		}
+		
 	}
 	
 	// edit the values stored for a trip
@@ -158,7 +166,6 @@ window.addEventListener("DOMContentLoaded", function () {
 		var trip = JSON.parse(value);
 
 		$('formTitle').innerHTML = "Edit Trip";
-		toggleDisplay("off");
 		
 		$('travelMethod').value = trip.method[1];
 		$('dest').value = trip.dest[1];
@@ -260,17 +267,18 @@ window.addEventListener("DOMContentLoaded", function () {
 	createTravelMethodList();
 	
 	// Set Link & Submit Click Events
-	var viewLink = $('viewAllTrips');
-	viewLink.addEventListener("click", getData);
-	
-	var clearLink = $('clearTrips');
-	clearLink.addEventListener("click", clearData);
-
 	var addButton = $('addTrip');
 	addButton.addEventListener("click", validateForm);
-
+	
 	var peopleSlider = $('numPeople');
 	peopleSlider.addEventListener("change", updatePeople);
 	
 	$('mmSearchLink').addEventListener("click", getData);
+	$('ftSearchLink').addEventListener("click", getData);
+	$('clearAllData').addEventListener("click", clearData);
+	$('Business').addEventListener("click", getData);
+	$('Education').addEventListener("click", getData);
+	$('Family').addEventListener("click", getData);
+	$('Vacation').addEventListener("click", getData);
+	$('Other').addEventListener("click", getData);
 });
