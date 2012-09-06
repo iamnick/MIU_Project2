@@ -46,3 +46,8 @@ date: Sept 3rd, 2012
 	text-align: center;
 	top: 120px;
 }
+
+#catThumbnailGrid {
+	text-align: center;
+	font-size: 12px;
+}
