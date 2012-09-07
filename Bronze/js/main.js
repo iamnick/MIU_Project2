@@ -74,7 +74,7 @@ window.addEventListener("DOMContentLoaded", function () {
 		}
 
 		// figure out where these entries are going to be appended (search or browse page)
-		if ((this.id === "mmSearchLink") || (this.id === "ftSearchLink")) {
+		if ((this.id === "mmSearchLink") || (this.id === "ftSearchLink1") || (this.id === "ftSearchLink2") || (this.id === "ftSearchLink3") || (this.id === "ftSearchLink4")) {
 			var appendLocation = $('searchTripList');
 			var browsing = false;
 			$('searchTripList').innerHTML = "";
@@ -274,7 +274,10 @@ window.addEventListener("DOMContentLoaded", function () {
 	peopleSlider.addEventListener("change", updatePeople);
 	
 	$('mmSearchLink').addEventListener("click", getData);
-	$('ftSearchLink').addEventListener("click", getData);
+	$('ftSearchLink1').addEventListener("click", getData);
+	$('ftSearchLink2').addEventListener("click", getData);
+	$('ftSearchLink3').addEventListener("click", getData);
+	$('ftSearchLink4').addEventListener("click", getData);
 	$('clearAllData').addEventListener("click", clearData);
 	$('Business').addEventListener("click", getData);
 	$('Education').addEventListener("click", getData);
